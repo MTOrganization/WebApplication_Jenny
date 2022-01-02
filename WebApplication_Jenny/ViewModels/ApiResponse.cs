@@ -7,7 +7,7 @@ namespace WebApplication_Jenny.ViewModels
 {
     public class ApiResponse
     {
-        public object Response { get; set; }
+        public object Data { get; set; }
         public string Message { get; set; }
         public int ApiStatus { get; set; }
     }
