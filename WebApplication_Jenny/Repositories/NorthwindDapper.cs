@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using WebApplication_Jenny.Interfaces;
+using WebApplication_Jenny.Models;
 
 namespace WebApplication_Jenny.Repositories
 {
@@ -19,6 +20,16 @@ namespace WebApplication_Jenny.Repositories
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
                 var targetList = conn.Query<T>(sql);
+                return targetList;
+            }
+        }
+
+        public Products GetProductById(int Id)
+        {
+            string sql = "SELECT * FROM Products WHERE ProductID = @ProductID";
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                var targetList = conn.QueryFirstOrDefault<Products>(sql, new { ProductID = Id });
                 return targetList;
             }
         }

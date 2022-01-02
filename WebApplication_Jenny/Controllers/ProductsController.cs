@@ -46,7 +46,7 @@ namespace WebApplication_Jenny.Controllers
             var response = new ApiResponse();
             try
             {
-                response.Data = null;
+                response.Data = _productService.GetProductById(Id);
                 response.Message = "成功";
                 response.ApiStatus = (int)ApiStatus.Success;
             }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using WebApplication_Jenny.Models;
 using WebApplication_Jenny.Repositories;
+using WebApplication_Jenny.ViewModels;
 
 namespace WebApplication_Jenny.Services
 {
@@ -14,9 +15,40 @@ namespace WebApplication_Jenny.Services
         {
             _dapper = new NorthwindDapper();
         }
-        public IEnumerable<Products> GetAllProduct()
+        public IEnumerable<ProductViewModel> GetAllProduct()
         {
-            return _dapper.GetAll<Products>();
+            var productList =  _dapper.GetAll<Products>();
+            var productViewModelList = productList.Select(x => new ProductViewModel
+            {
+                ProductName = x.ProductName,
+                SupplierID = x.SupplierID,
+                CategoryID = x.CategoryID,
+                QuantityPerUnit = x.QuantityPerUnit,
+                UnitPrice = x.UnitPrice,
+                UnitsInStock = x.UnitsInStock,
+                UnitsOnOrder = x.UnitsOnOrder,
+                ReorderLevel = x.ReorderLevel,
+                Discontinued = x.Discontinued
+            });
+            return productViewModelList;
+        }
+
+        public ProductViewModel GetProductById(int Id)
+        {
+            var product = _dapper.GetProductById(Id);
+            var productViewModel = product == null ? null : new ProductViewModel
+            {
+                ProductName = product.ProductName,
+                SupplierID = product.SupplierID,
+                CategoryID = product.CategoryID,
+                QuantityPerUnit = product.QuantityPerUnit,
+                UnitPrice = product.UnitPrice,
+                UnitsInStock = product.UnitsInStock,
+                UnitsOnOrder = product.UnitsOnOrder,
+                ReorderLevel = product.ReorderLevel,
+                Discontinued = product.Discontinued
+            };
+            return productViewModel;
         }
     }
 }
