@@ -104,7 +104,7 @@ namespace WebApplication_Jenny.Controllers
             try
             {
                 response.Data = null;
-                response.Message = "成功";
+                response.Message = $"共影響{_productService.DeleteProductById(Id)}筆資料列";
                 response.ApiStatus = (int)ApiStatus.Success;
             }
             catch (Exception ex)

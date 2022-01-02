@@ -50,5 +50,10 @@ namespace WebApplication_Jenny.Services
             };
             return productViewModel;
         }
+
+        public int DeleteProductById(int Id)
+        {
+            return _dapper.DeleteProductById(Id);
+        }
     }
 }

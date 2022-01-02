@@ -33,5 +33,15 @@ namespace WebApplication_Jenny.Repositories
                 return targetList;
             }
         }
+
+        public int DeleteProductById(int Id)
+        {
+            string sql = "DELETE FROM Products WHERE ProductID = @ProductID";
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                var dataRow = conn.Execute(sql, new { ProductID = Id });
+                return dataRow;
+            }
+        }
     }
 }
