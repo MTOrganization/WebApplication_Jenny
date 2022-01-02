@@ -20,6 +20,7 @@ namespace WebApplication_Jenny.Services
             var productList =  _dapper.GetAll<Products>();
             var productViewModelList = productList.Select(x => new ProductViewModel
             {
+                ProductID = x.ProductID,
                 ProductName = x.ProductName,
                 SupplierID = x.SupplierID,
                 CategoryID = x.CategoryID,
@@ -38,6 +39,7 @@ namespace WebApplication_Jenny.Services
             var product = _dapper.GetProductById(Id);
             var productViewModel = product == null ? null : new ProductViewModel
             {
+                ProductID = product.ProductID,
                 ProductName = product.ProductName,
                 SupplierID = product.SupplierID,
                 CategoryID = product.CategoryID,

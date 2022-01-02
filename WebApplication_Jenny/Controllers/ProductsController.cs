@@ -22,31 +22,19 @@ namespace WebApplication_Jenny.Controllers
         }
 
         [HttpGet]
-        public ApiResponse GetAllProducts()
+        public ApiResponse GetProduct(int? Id = null)
         {
             var response = new ApiResponse();
             try
             {
-                response.Data = _productService.GetAllProduct();
-                response.Message = "成功";
-                response.ApiStatus = (int)ApiStatus.Success;
-            }
-            catch (Exception ex)
-            {
-                response.Message = $"錯誤：{ex.Message}";
-                response.ApiStatus = (int)ApiStatus.Fail;
-            }
-
-            return response;
-        }
-
-        [HttpGet]
-        public ApiResponse GetProductById(int Id)
-        {
-            var response = new ApiResponse();
-            try
-            {
-                response.Data = _productService.GetProductById(Id);
+                if(Id == null)
+                {
+                    response.Data = _productService.GetAllProduct();
+                }
+                else
+                {
+                    response.Data = _productService.GetProductById(Id.Value);
+                }
                 response.Message = "成功";
                 response.ApiStatus = (int)ApiStatus.Success;
             }
@@ -79,7 +67,7 @@ namespace WebApplication_Jenny.Controllers
         }
 
         [HttpPatch]
-        public ApiResponse ModifyProductById(int Id)
+        public ApiResponse ModifyProductById(int Id, [FromBody]decimal unitPrice)
         {
             var response = new ApiResponse();
             try
@@ -104,7 +92,7 @@ namespace WebApplication_Jenny.Controllers
             try
             {
                 response.Data = null;
-                response.Message = $"共影響{_productService.DeleteProductById(Id)}筆資料列";
+                response.Message = $"成功，共影響{_productService.DeleteProductById(Id)}筆資料列";
                 response.ApiStatus = (int)ApiStatus.Success;
             }
             catch (Exception ex)

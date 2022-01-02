@@ -9,6 +9,8 @@ namespace WebApplication_Jenny.ViewModels
 {
     public class ProductViewModel
     {
+        public int ProductID { get; set; }
+
         [Required]
         [StringLength(40)]
         public string ProductName { get; set; }

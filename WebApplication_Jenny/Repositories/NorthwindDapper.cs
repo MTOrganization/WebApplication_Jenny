@@ -34,6 +34,11 @@ namespace WebApplication_Jenny.Repositories
             }
         }
 
+        //public int ModifyProductUnitPrice()
+        //{
+
+        //}
+
         public int DeleteProductById(int Id)
         {
             string sql = "DELETE FROM Products WHERE ProductID = @ProductID";
