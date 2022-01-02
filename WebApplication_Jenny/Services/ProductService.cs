@@ -11,9 +11,11 @@ namespace WebApplication_Jenny.Services
     public class ProductService
     {
         private readonly NorthwindDapper _dapper;
+        private readonly NorthwindRepository _repository;
         public ProductService()
         {
             _dapper = new NorthwindDapper();
+            _repository = new NorthwindRepository();
         }
         public IEnumerable<ProductViewModel> GetAllProduct()
         {
@@ -37,7 +39,7 @@ namespace WebApplication_Jenny.Services
         public ProductViewModel GetProductById(int Id)
         {
             var product = _dapper.GetProductById(Id);
-            var productViewModel = product == null ? null : new ProductViewModel
+            var productVM = product == null ? null : new ProductViewModel
             {
                 ProductID = product.ProductID,
                 ProductName = product.ProductName,
@@ -50,7 +52,43 @@ namespace WebApplication_Jenny.Services
                 ReorderLevel = product.ReorderLevel,
                 Discontinued = product.Discontinued
             };
-            return productViewModel;
+            return productVM;
+        }
+
+        public void CreateProduct(PostOrPutProductViewModel productVM)
+        {
+            var product = new Products
+            {
+                ProductName = productVM.ProductName,
+                SupplierID = productVM.SupplierID,
+                CategoryID = productVM.CategoryID,
+                QuantityPerUnit = productVM.QuantityPerUnit,
+                UnitPrice = productVM.UnitPrice,
+                UnitsInStock = productVM.UnitsInStock,
+                UnitsOnOrder = productVM.UnitsOnOrder,
+                ReorderLevel = productVM.ReorderLevel,
+                Discontinued = productVM.Discontinued
+            };
+            _repository.Create(product);
+            _repository.SaveChanges();
+            _repository.Dispose();
+        }
+
+        public void UpdateProduct(ProductViewModel productVM)
+        {
+            var product = _dapper.GetProductById(productVM.ProductID);
+            product.ProductName = productVM.ProductName;
+            product.SupplierID = productVM.SupplierID;
+            product.CategoryID = productVM.CategoryID;
+            product.QuantityPerUnit = productVM.QuantityPerUnit;
+            product.UnitPrice = productVM.UnitPrice;
+            product.UnitsInStock = productVM.UnitsInStock;
+            product.UnitsOnOrder = productVM.UnitsOnOrder;
+            product.ReorderLevel = productVM.ReorderLevel;
+            product.Discontinued = productVM.Discontinued;
+            _repository.Update(product);
+            _repository.SaveChanges();
+            _repository.Dispose();
         }
 
         public int DeleteProductById(int Id)

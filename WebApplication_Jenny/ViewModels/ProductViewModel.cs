@@ -7,13 +7,12 @@ using System.Web;
 
 namespace WebApplication_Jenny.ViewModels
 {
-    public class ProductViewModel
+    public class PostOrPutProductViewModel
     {
-        public int ProductID { get; set; }
-
         [Required]
         [StringLength(40)]
         public string ProductName { get; set; }
+
         public int? SupplierID { get; set; }
 
         public int? CategoryID { get; set; }
@@ -31,5 +30,10 @@ namespace WebApplication_Jenny.ViewModels
         public short? ReorderLevel { get; set; }
 
         public bool Discontinued { get; set; }
+    }
+
+    public class ProductViewModel : PostOrPutProductViewModel
+    {
+        public int ProductID { get; set; }
     }
 }

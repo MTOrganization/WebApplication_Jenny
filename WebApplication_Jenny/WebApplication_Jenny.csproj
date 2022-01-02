@@ -209,6 +209,7 @@
     <Compile Include="Models\Territories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\NorthwindDapper.cs" />
+    <Compile Include="Repositories\NorthwindRepository.cs" />
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="ViewModels\ApiResponse.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />

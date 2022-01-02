@@ -48,12 +48,12 @@ namespace WebApplication_Jenny.Controllers
         }
 
         [HttpPost]
-        public ApiResponse CreateProduct()
+        public ApiResponse CreateProduct([FromBody]PostOrPutProductViewModel productVM)
         {
             var response = new ApiResponse();
             try
             {
-                response.Data = null;
+                _productService.CreateProduct(productVM);
                 response.Message = "成功";
                 response.ApiStatus = (int)ApiStatus.Success;
             }
@@ -66,8 +66,8 @@ namespace WebApplication_Jenny.Controllers
             return response;
         }
 
-        [HttpPatch]
-        public ApiResponse ModifyProductById(int Id, [FromBody]decimal unitPrice)
+        [HttpPut]
+        public ApiResponse UpdateProduct([FromBody]ProductViewModel productVM)
         {
             var response = new ApiResponse();
             try
