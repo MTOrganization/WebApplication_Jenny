@@ -47,13 +47,18 @@ namespace WebApplication_Jenny.Controllers
             return response;
         }
 
+        /// <summary>
+        /// 新增商品
+        /// </summary>
+        /// <param name="value">新增商品應填欄位</param>
+        /// <returns></returns>
         [HttpPost]
-        public ApiResponse CreateProduct([FromBody]PostOrPutProductViewModel productVM)
+        public ApiResponse CreateProduct([FromBody]PostOrPutProductViewModel value)
         {
             var response = new ApiResponse();
             try
             {
-                _productService.CreateProduct(productVM);
+                _productService.CreateProduct(value);
                 response.Message = "成功";
                 response.ApiStatus = (int)ApiStatus.Success;
             }
@@ -67,12 +72,12 @@ namespace WebApplication_Jenny.Controllers
         }
 
         [HttpPut]
-        public ApiResponse UpdateProduct([FromBody]ProductViewModel productVM)
+        public ApiResponse UpdateProduct([FromBody]ProductViewModel value)
         {
             var response = new ApiResponse();
             try
             {
-                response.Data = null;
+                _productService.UpdateProduct(value);
                 response.Message = "成功";
                 response.ApiStatus = (int)ApiStatus.Success;
             }
