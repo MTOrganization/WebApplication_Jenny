@@ -7,14 +7,15 @@ namespace WebApplication_Jenny.Models
     using System.Data.Entity.Spatial;
     using WebApplication_Jenny.Interfaces;
 
-    public partial class Product : ITable
+    public partial class Products : ITable
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public Products()
         {
-            Order_Details = new HashSet<Order_Detail>();
+            Order_Details = new HashSet<Order_Details>();
         }
 
+        [Key]
         public int ProductID { get; set; }
 
         [Required]
@@ -39,11 +40,11 @@ namespace WebApplication_Jenny.Models
 
         public bool Discontinued { get; set; }
 
-        public virtual Category Category { get; set; }
+        public virtual Categories Categories { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order_Detail> Order_Details { get; set; }
+        public virtual ICollection<Order_Details> Order_Details { get; set; }
 
-        public virtual Supplier Supplier { get; set; }
+        public virtual Suppliers Suppliers { get; set; }
     }
 }

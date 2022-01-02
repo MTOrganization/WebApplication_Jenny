@@ -12,67 +12,67 @@ namespace WebApplication_Jenny.Models
         {
         }
 
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<CustomerDemographic> CustomerDemographics { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Order_Detail> Order_Details { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Region> Regions { get; set; }
-        public virtual DbSet<Shipper> Shippers { get; set; }
-        public virtual DbSet<Supplier> Suppliers { get; set; }
-        public virtual DbSet<Territory> Territories { get; set; }
+        public virtual DbSet<Categories> Categories { get; set; }
+        public virtual DbSet<CustomerDemographics> CustomerDemographics { get; set; }
+        public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<Order_Details> Order_Details { get; set; }
+        public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<Region> Region { get; set; }
+        public virtual DbSet<Shippers> Shippers { get; set; }
+        public virtual DbSet<Suppliers> Suppliers { get; set; }
+        public virtual DbSet<Territories> Territories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CustomerDemographic>()
+            modelBuilder.Entity<CustomerDemographics>()
                 .Property(e => e.CustomerTypeID)
                 .IsFixedLength();
 
-            modelBuilder.Entity<CustomerDemographic>()
+            modelBuilder.Entity<CustomerDemographics>()
                 .HasMany(e => e.Customers)
                 .WithMany(e => e.CustomerDemographics)
                 .Map(m => m.ToTable("CustomerCustomerDemo").MapLeftKey("CustomerTypeID").MapRightKey("CustomerID"));
 
-            modelBuilder.Entity<Customer>()
+            modelBuilder.Entity<Customers>()
                 .Property(e => e.CustomerID)
                 .IsFixedLength();
 
-            modelBuilder.Entity<Employee>()
+            modelBuilder.Entity<Employees>()
                 .HasMany(e => e.Employees1)
-                .WithOptional(e => e.Employee1)
+                .WithOptional(e => e.Employees2)
                 .HasForeignKey(e => e.ReportsTo);
 
-            modelBuilder.Entity<Employee>()
+            modelBuilder.Entity<Employees>()
                 .HasMany(e => e.Territories)
                 .WithMany(e => e.Employees)
                 .Map(m => m.ToTable("EmployeeTerritories").MapLeftKey("EmployeeID").MapRightKey("TerritoryID"));
 
-            modelBuilder.Entity<Order_Detail>()
+            modelBuilder.Entity<Order_Details>()
                 .Property(e => e.UnitPrice)
                 .HasPrecision(19, 4);
 
-            modelBuilder.Entity<Order>()
+            modelBuilder.Entity<Orders>()
                 .Property(e => e.CustomerID)
                 .IsFixedLength();
 
-            modelBuilder.Entity<Order>()
+            modelBuilder.Entity<Orders>()
                 .Property(e => e.Freight)
                 .HasPrecision(19, 4);
 
-            modelBuilder.Entity<Order>()
+            modelBuilder.Entity<Orders>()
                 .HasMany(e => e.Order_Details)
-                .WithRequired(e => e.Order)
+                .WithRequired(e => e.Orders)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Product>()
+            modelBuilder.Entity<Products>()
                 .Property(e => e.UnitPrice)
                 .HasPrecision(19, 4);
 
-            modelBuilder.Entity<Product>()
+            modelBuilder.Entity<Products>()
                 .HasMany(e => e.Order_Details)
-                .WithRequired(e => e.Product)
+                .WithRequired(e => e.Products)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Region>()
@@ -84,12 +84,12 @@ namespace WebApplication_Jenny.Models
                 .WithRequired(e => e.Region)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Shipper>()
+            modelBuilder.Entity<Shippers>()
                 .HasMany(e => e.Orders)
-                .WithOptional(e => e.Shipper)
+                .WithOptional(e => e.Shippers)
                 .HasForeignKey(e => e.ShipVia);
 
-            modelBuilder.Entity<Territory>()
+            modelBuilder.Entity<Territories>()
                 .Property(e => e.TerritoryDescription)
                 .IsFixedLength();
         }

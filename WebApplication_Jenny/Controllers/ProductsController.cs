@@ -13,10 +13,10 @@ namespace WebApplication_Jenny.Controllers
 {
     [RoutePrefix("[controller]")]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class ProductController : ApiController
+    public class ProductsController : ApiController
     {
         private readonly ProductService _productService;
-        public ProductController()
+        public ProductsController()
         {
             _productService = new ProductService();
         }
@@ -27,7 +27,7 @@ namespace WebApplication_Jenny.Controllers
             var response = new ApiResponse();
             try
             {
-                response.Data = JsonConvert.SerializeObject(_productService.GetAllProduct());
+                response.Data = _productService.GetAllProduct();
                 response.Message = "成功";
                 response.ApiStatus = (int)ApiStatus.Success;
             }

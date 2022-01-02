@@ -5,29 +5,28 @@ namespace WebApplication_Jenny.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    using WebApplication_Jenny.Interfaces;
 
-    public partial class Category : ITable
+    public partial class Territories
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
+        public Territories()
         {
-            Products = new HashSet<Product>();
+            Employees = new HashSet<Employees>();
         }
 
-        public int CategoryID { get; set; }
+        [Key]
+        [StringLength(20)]
+        public string TerritoryID { get; set; }
 
         [Required]
-        [StringLength(15)]
-        public string CategoryName { get; set; }
+        [StringLength(50)]
+        public string TerritoryDescription { get; set; }
 
-        [Column(TypeName = "ntext")]
-        public string Description { get; set; }
+        public int RegionID { get; set; }
 
-        [Column(TypeName = "image")]
-        public byte[] Picture { get; set; }
+        public virtual Region Region { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Employees> Employees { get; set; }
     }
 }

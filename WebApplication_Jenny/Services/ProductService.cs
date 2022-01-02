@@ -14,9 +14,9 @@ namespace WebApplication_Jenny.Services
         {
             _dapper = new NorthwindDapper();
         }
-        public IEnumerable<Product> GetAllProduct()
+        public IEnumerable<Products> GetAllProduct()
         {
-            return _dapper.GetAll<Product>();
+            return _dapper.GetAll<Products>();
         }
     }
 }

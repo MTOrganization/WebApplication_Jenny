@@ -5,10 +5,9 @@ namespace WebApplication_Jenny.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    using WebApplication_Jenny.Interfaces;
 
     [Table("Order Details")]
-    public partial class Order_Detail : ITable
+    public partial class Order_Details
     {
         [Key]
         [Column(Order = 0)]
@@ -27,8 +26,8 @@ namespace WebApplication_Jenny.Models
 
         public float Discount { get; set; }
 
-        public virtual Order Order { get; set; }
+        public virtual Orders Orders { get; set; }
 
-        public virtual Product Product { get; set; }
+        public virtual Products Products { get; set; }
     }
 }

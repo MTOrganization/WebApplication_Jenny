@@ -5,18 +5,18 @@ namespace WebApplication_Jenny.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    using WebApplication_Jenny.Interfaces;
 
-    public partial class Employee : ITable
+    public partial class Employees
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employee()
+        public Employees()
         {
-            Employees1 = new HashSet<Employee>();
-            Orders = new HashSet<Order>();
-            Territories = new HashSet<Territory>();
+            Employees1 = new HashSet<Employees>();
+            Orders = new HashSet<Orders>();
+            Territories = new HashSet<Territories>();
         }
 
+        [Key]
         public int EmployeeID { get; set; }
 
         [Required]
@@ -70,14 +70,14 @@ namespace WebApplication_Jenny.Models
         public string PhotoPath { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employee> Employees1 { get; set; }
+        public virtual ICollection<Employees> Employees1 { get; set; }
 
-        public virtual Employee Employee1 { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual Employees Employees2 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Territory> Territories { get; set; }
+        public virtual ICollection<Orders> Orders { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Territories> Territories { get; set; }
     }
 }

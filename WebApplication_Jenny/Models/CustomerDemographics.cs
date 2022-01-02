@@ -5,26 +5,23 @@ namespace WebApplication_Jenny.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-    using WebApplication_Jenny.Interfaces;
 
-    public partial class Shipper : ITable
+    public partial class CustomerDemographics
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Shipper()
+        public CustomerDemographics()
         {
-            Orders = new HashSet<Order>();
+            Customers = new HashSet<Customers>();
         }
 
-        public int ShipperID { get; set; }
+        [Key]
+        [StringLength(10)]
+        public string CustomerTypeID { get; set; }
 
-        [Required]
-        [StringLength(40)]
-        public string CompanyName { get; set; }
-
-        [StringLength(24)]
-        public string Phone { get; set; }
+        [Column(TypeName = "ntext")]
+        public string CustomerDesc { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Customers> Customers { get; set; }
     }
 }
