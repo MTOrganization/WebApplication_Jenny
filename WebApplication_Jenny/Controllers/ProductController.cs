@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using WebApplication_Jenny.Services;
 using WebApplication_Jenny.ViewModels;
 
 namespace WebApplication_Jenny.Controllers
@@ -14,13 +15,19 @@ namespace WebApplication_Jenny.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ProductController : ApiController
     {
+        private readonly ProductService _productService;
+        public ProductController()
+        {
+            _productService = new ProductService();
+        }
+
         [HttpGet]
         public ApiResponse GetAllProducts()
         {
             var response = new ApiResponse();
             try
             {
-                response.Data = null;
+                response.Data = JsonConvert.SerializeObject(_productService.GetAllProduct());
                 response.Message = "成功";
                 response.ApiStatus = (int)ApiStatus.Success;
             }
