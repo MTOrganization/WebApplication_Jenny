@@ -21,19 +21,24 @@ namespace WebApplication_Jenny.Controllers
             _productService = new ProductService();
         }
 
+        /// <summary>
+        /// 取得商品資訊
+        /// </summary>
+        /// <param name="id">以Id搜尋商品。若不提供Id，則可取回所有商品資訊</param>
+        /// <returns></returns>
         [HttpGet]
-        public ApiResponse GetProduct(int? Id = null)
+        public ApiResponse GetProduct(int? id = null)
         {
             var response = new ApiResponse();
             try
             {
-                if(Id == null)
+                if(id == null)
                 {
                     response.Data = _productService.GetAllProduct();
                 }
                 else
                 {
-                    response.Data = _productService.GetProductById(Id.Value);
+                    response.Data = _productService.GetProductById(id.Value);
                 }
                 response.Message = "成功";
                 response.ApiStatus = (int)ApiStatus.Success;
@@ -50,7 +55,7 @@ namespace WebApplication_Jenny.Controllers
         /// <summary>
         /// 新增商品
         /// </summary>
-        /// <param name="value">新增商品應填欄位</param>
+        /// <param name="value">依照格式填寫</param>
         /// <returns></returns>
         [HttpPost]
         public ApiResponse CreateProduct([FromBody]PostOrPutProductViewModel value)
@@ -71,6 +76,11 @@ namespace WebApplication_Jenny.Controllers
             return response;
         }
 
+        /// <summary>
+        /// 修改商品資訊
+        /// </summary>
+        /// <param name="value">依照格式填寫</param>
+        /// <returns></returns>
         [HttpPut]
         public ApiResponse UpdateProduct([FromBody]ProductViewModel value)
         {
@@ -90,14 +100,18 @@ namespace WebApplication_Jenny.Controllers
             return response;
         }
 
+        /// <summary>
+        /// 刪除商品
+        /// </summary>
+        /// <param name="id">以Id刪除商品</param>
+        /// <returns></returns>
         [HttpDelete]
-        public ApiResponse DeleteProductById(int Id)
+        public ApiResponse DeleteProductById(int id)
         {
             var response = new ApiResponse();
             try
             {
-                response.Data = null;
-                response.Message = $"成功，共影響{_productService.DeleteProductById(Id)}筆資料列";
+                response.Message = $"成功，共影響{_productService.DeleteProductById(id)}筆資料列";
                 response.ApiStatus = (int)ApiStatus.Success;
             }
             catch (Exception ex)

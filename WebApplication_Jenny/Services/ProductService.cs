@@ -36,9 +36,9 @@ namespace WebApplication_Jenny.Services
             return productViewModelList;
         }
 
-        public ProductViewModel GetProductById(int Id)
+        public ProductViewModel GetProductById(int id)
         {
-            var product = _dapper.GetProductById(Id);
+            var product = _dapper.GetProductById(id);
             var productVM = product == null ? null : new ProductViewModel
             {
                 ProductID = product.ProductID,
@@ -91,9 +91,9 @@ namespace WebApplication_Jenny.Services
             _repository.Dispose();
         }
 
-        public int DeleteProductById(int Id)
+        public int DeleteProductById(int id)
         {
-            return _dapper.DeleteProductById(Id);
+            return _dapper.DeleteProductById(id);
         }
     }
 }

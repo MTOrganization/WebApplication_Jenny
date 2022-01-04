@@ -24,22 +24,22 @@ namespace WebApplication_Jenny.Repositories
             }
         }
 
-        public Products GetProductById(int Id)
+        public Products GetProductById(int id)
         {
             string sql = "SELECT * FROM Products WHERE ProductID = @ProductID";
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
-                var targetList = conn.QueryFirstOrDefault<Products>(sql, new { ProductID = Id });
+                var targetList = conn.QueryFirstOrDefault<Products>(sql, new { ProductID = id });
                 return targetList;
             }
         }
 
-        public int DeleteProductById(int Id)
+        public int DeleteProductById(int id)
         {
             string sql = "DELETE FROM Products WHERE ProductID = @ProductID";
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
-                var dataRow = conn.Execute(sql, new { ProductID = Id });
+                var dataRow = conn.Execute(sql, new { ProductID = id });
                 return dataRow;
             }
         }

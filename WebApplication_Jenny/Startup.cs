@@ -24,7 +24,8 @@ namespace WebApplication_Jenny
                 //可加入客製化調整邏輯
                 settings.PostProcess = document =>
                 {
-                    document.Info.Title = "Northwind WebAPI說明文件";
+                    document.Info.Title = "Northwind API";
+                    document.Info.Description = "Contains function of CRUD.";
                 };
             });
             //app.UseWebApi(config);
